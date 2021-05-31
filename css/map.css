@@ -1,0 +1,38 @@
+html,
+body,
+#map {
+  height: 100%;
+  width: 100vw;
+}
+
+h1 {
+  text-align: center;
+}
+
+section.map {
+  display: grid;
+  height: 85%;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: 85% 15%;
+}
+
+.peta {
+  grid-column: 1/-1;
+}
+
+.gambar {
+  grid-column: 1/4;
+}
+
+.deskripsi {
+  padding: 10px;
+  background: #f7f7f7;
+  color: #222426;
+  grid-column: 4/-1;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

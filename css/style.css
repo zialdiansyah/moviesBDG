@@ -1,0 +1,129 @@
+html,body {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  background: #14161E;
+  color: #9ba4c1;
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+}
+
+h1,h3,p {
+  text-align: center;
+}
+
+a {
+  text-decoration: none;
+}
+
+a.button {
+  height: 120px;
+  width: 80%;
+  background-color: #d3d3d3;
+  text-align: center;
+  border-radius: 10px;
+  color: #222426;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+a.button i {
+  font-size: 2em;
+}
+a.button span {
+  font-size: 1.5em;
+}
+
+div p {
+  color: #ffffff;
+  font-size: 1.5em;
+}
+
+.button {
+  margin: auto;
+}
+
+section.header {
+  height: 7%;
+  background-color: #fafafa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #d3d3d3;
+}
+
+span.title {
+  color: #222426;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+section.nav {
+  height: 8%;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  background-color: #ebebeb;
+  border-top: 1px solid #d3d3d3;
+}
+
+section.film {
+  height: 85%;
+  width: 100%;
+  
+  overflow-y: scroll;
+  align-items: center;
+}
+
+.wrapper{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+}
+
+.movie {
+  height: 240px;
+}
+
+.movie .judul {
+  width: 100%;
+  height: 40px;
+  background-color: #ececec;
+  color: #222426;
+  text-align: center;
+  justify-self: center;
+}
+
+.movie-poster {
+  height: 200px;
+}
+
+.movie-poster img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+div.menu {
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+div.menu a {
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+div.menu a i {
+  font-size: 1.5em;
+}
+
+div.menu a span {
+  font-size: 0.9em;
+}
