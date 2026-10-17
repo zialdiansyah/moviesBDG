@@ -1,38 +1,166 @@
-html,
-body,
-#map {
-  height: 100%;
-  width: 100vw;
+/* Cinema page: map, markers, hint, and the selected-cinema preview sheet. */
+
+.map-area {
+  position: relative;
+  flex: 1;
+  min-height: 0;
 }
 
-h1 {
+.map-canvas {
+  position: absolute;
+  inset: 0;
+  background: var(--surface);
+}
+
+/* Keep the map monochrome without needing a themed tile provider. */
+.map-canvas .leaflet-tile-pane {
+  filter: grayscale(1);
+}
+
+.map-hint {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  width: max-content;
+  max-width: calc(100% - 24px);
+  margin: 0;
+  padding: 8px 14px;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-size: 13px;
   text-align: center;
 }
 
-section.map {
+.map-empty {
+  position: absolute;
+  inset: 0;
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  pointer-events: none;
+}
+
+.map-empty p {
+  max-width: 300px;
+  margin: 0;
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  color: var(--text-muted);
+  font-size: 14px;
+  text-align: center;
+}
+
+/* ---------- Markers ---------- */
+
+.cinema-marker {
+  background: none;
+  border: none;
+}
+
+.cinema-marker-dot {
+  display: block;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  background: var(--text);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+  transition: transform 120ms ease;
+}
+
+.cinema-marker.is-selected .cinema-marker-dot {
+  transform: scale(1.35);
+}
+
+.cinema-marker:focus-visible .cinema-marker-dot {
+  outline: 2px solid var(--text);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cinema-marker-dot {
+    transition: none;
+  }
+}
+
+/* ---------- Selected cinema preview ---------- */
+
+.cinema-preview {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
   display: grid;
-  height: 85%;
-  grid-template-columns: repeat(10, 1fr);
-  grid-template-rows: 85% 15%;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 12px 12px 14px;
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.1);
+  animation: preview-in 160ms ease-out;
 }
 
-.peta {
-  grid-column: 1/-1;
+.cinema-preview[hidden] {
+  display: none;
 }
 
-.gambar {
-  grid-column: 1/4;
+@keyframes preview-in {
+  from {
+    transform: translateY(8px);
+    opacity: 0;
+  }
 }
 
-.deskripsi {
-  padding: 10px;
-  background: #f7f7f7;
-  color: #222426;
-  grid-column: 4/-1;
+@media (prefers-reduced-motion: reduce) {
+  .cinema-preview {
+    animation: none;
+  }
 }
 
-img {
+.cinema-preview-media {
+  width: 96px;
+  height: 72px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.cinema-preview-image {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.cinema-preview-fallback {
+  width: 100%;
+  height: 100%;
+  font-size: 22px;
+}
+
+.cinema-preview-name {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.cinema-preview-address {
+  margin: 2px 0 0;
+  font-size: 12.5px;
+  line-height: 1.35;
+  color: var(--text-muted);
+}
+
+.cinema-preview-close {
+  align-self: start;
 }

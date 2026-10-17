@@ -1,47 +1,79 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Film yang sedang tayang dan akan tayang, serta daftar bioskop di kota Anda.">
+  <meta name="theme-color" content="#ffffff">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="https://unpkg.com/font-awesome@4.7.0/css/font-awesome.min.css" />
+  <link rel="preconnect" href="https://image.tmdb.org">
+  <link rel="stylesheet" href="https://unpkg.com/font-awesome@4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/style.css">
-  <title>Bioskop Bandung</title>
+  <title>Now Playing — Bioskop</title>
 </head>
 
 <body>
-  <section class="header">
-    <span class="title">Film di Bandung</span>
-  </section>
+  <header class="app-header">
+    <span class="app-name">Bioskop</span>
+    <button type="button" class="city-button" id="city-button" aria-haspopup="dialog" aria-controls="city-dialog">
+      <span id="city-label">Bandung</span>
+      <i class="fa fa-caret-down" aria-hidden="true"></i>
+    </button>
+  </header>
 
-  <section class="film">
-    <h3>Now Playing</h3>
-    <div class="wrapper" id="movie-container">
-      <div class="loading">
-        loading...
+  <main class="app-main">
+    <section class="movie-section" aria-labelledby="now-playing-title">
+      <h1 class="section-title visually-hidden" id="now-playing-title">Now Playing</h1>
+
+      <div class="list-toggle" role="tablist" aria-label="Daftar film">
+        <button type="button" class="toggle-button" id="tab-now-playing" role="tab" aria-selected="true"
+          data-tab="now-playing">Now Playing</button>
+        <button type="button" class="toggle-button" id="tab-upcoming" role="tab" aria-selected="false"
+          data-tab="upcoming" tabindex="-1">Upcoming</button>
       </div>
-    </div>
-  </section>
 
-  <section class="nav">
-    <div class="menu">
-      <a href="index.html">
-        <i class="fa fa-home"></i>
-        <span>Home</span>
-      </a>
-      <a href="bioskop.html">
-        <i class="fa fa-building"></i>
-        <span>Bioskop</span>
-      </a>
-    </div>
-  </section>
+      <p class="section-note" id="movie-section-note">Sedang tayang di Indonesia · data TMDB</p>
 
-  <script src="script.js"></script>
-  
+      <div class="movie-panel" id="movie-panel" role="tabpanel" aria-labelledby="tab-now-playing">
+        <div class="status" id="movie-status" role="status" aria-live="polite" hidden>
+          <p class="status-message" id="movie-status-message"></p>
+          <button type="button" class="button" id="movie-retry" hidden>Coba lagi</button>
+        </div>
+
+        <ul class="movie-grid" id="movie-list"></ul>
+      </div>
+    </section>
+  </main>
+
+  <nav class="app-nav" aria-label="Navigasi utama">
+    <a class="nav-item" href="index.html" aria-current="page">
+      <i class="fa fa-home" aria-hidden="true"></i>
+      <span>Home</span>
+    </a>
+    <a class="nav-item" href="bioskop.html">
+      <i class="fa fa-building" aria-hidden="true"></i>
+      <span>Bioskop</span>
+    </a>
+  </nav>
+
+  <dialog class="city-dialog" id="city-dialog" aria-labelledby="city-dialog-title">
+    <div class="city-dialog-head">
+      <h2 id="city-dialog-title">Pilih kota</h2>
+      <button type="button" class="icon-button" id="city-dialog-close" aria-label="Tutup">
+        <i class="fa fa-times" aria-hidden="true"></i>
+      </button>
+    </div>
+    <ul class="city-options" id="city-options"></ul>
+  </dialog>
+
+  <script src="js/data.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/tmdb.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/pwa.js"></script>
+  <script src="js/home.js"></script>
 </body>
 
 </html>
